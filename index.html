@@ -16,50 +16,122 @@
     </div><!-- /.container -->
 	<p>Processing test</p>
 	<script type="text/processing">
-	float num1, num2, n1, n2, angle;
+		import java.util.Iterator;
+
+Particle p;
+int total = 100;
+float x1, x2, y1, y2;
+
+int elapsedFrames = 0;
+
+ArrayList<Particle> particles;
+
+PVector mouse, mouse_p, velocity;
+PVector dir;
+int magnitude;
+
 void setup()
 {
-  size(400,400);
-  num1=11;
-  num2=11;
-  angle = 0;
-  rectMode(CENTER);
+  size(640, 600);
+  particles = new ArrayList<Particle>();
 }
 
 void draw()
 {
-  background(255, 55);
-  n1 = width/num1;
-  n2 = height/num2;
-  for (int j=0; j<=num2; j++){
-    for (int i=0; i<=num1; i++){
-      pushMatrix();
-      noStroke();
-      fill(0, 50*(cos(angle)+3));
-      translate(n1*i, n2*j);
-      if ((i*j)%2==0) {
-        rotate(angle);
-        polygon(0,0,40,4);
-      }
-      else {
-        rotate(angle*-1);
-        polygon(0, 0, 30, 5);
-      }
-      popMatrix();
+  background(255);
+  
+  mouse = new PVector(mouseX, mouseY);
+  mouse_p = new PVector(pmouseX,pmouseY);
+  dir = PVector.sub(mouse, mouse_p);
+  magnitude = int(dir.mag());
+  int numPart = magnitude*3;
+  
+  for (int i=1; i<=numPart;i++) {
+    float rand_1 = random(-magnitude, magnitude);
+    float rand_2 = random(-magnitude, magnitude);    
+    PVector rand = new PVector(rand_1, rand_2);
+    particles.add(new Particle(PVector.add(mouse,rand)));
+  }
+  
+  Iterator<Particle> it = particles.iterator();
+  while (it.hasNext()){
+    Particle p = it.next();
+    p.run();
+    if (p.isDead()){
+      it.remove();
     }
   }
-  angle+=0.02;
+  
+  elapsedFrames++;
 }
-
-void polygon(float x, float y, float radius, int npoints) {
-  float angle = TWO_PI / npoints;
-  beginShape();
-  for (float a = 0; a < TWO_PI; a += angle) {
-    float sx = x + cos(a) * radius;
-    float sy = y + sin(a) * radius;
-    vertex(sx, sy);
+class Particle
+{
+  PVector location;
+  PVector velocity;
+  PVector noiseVector;
+  
+  float noise;
+  float lifespan;
+  float age;
+  float dist;
+  
+  boolean isDead;
+  
+  color c;
+  
+  
+  Particle(PVector location_)
+  {
+    location = location_;
+    velocity = new PVector(random(-1,1), random(-1,5));
+    age = 0;
+    lifespan = 255;
+    isDead = false;
+    noiseVector = new PVector();
+    
+    
+    int index = int((((mouse.y/2)/height)*10)+1);
+    color[] choices = {#f2eee6, #e6e6b5, #65877c, #111229, #6e5e6a, #bdc4c9};
+    //int index = int(random(choices.length));
+    c = choices[index];
   }
-  endShape(CLOSE);
+
+  void run()
+  {
+    update();
+    display();
+  }  
+  
+  void update()
+  {
+    noise = noise(location.x*0.005, location.y*0.005, elapsedFrames*0.005);
+    noiseVector.x = cos(((noise - 0.3)*TWO_PI)*10);
+    noiseVector.y = sin(((noise - 0.3)*TWO_PI)*10);
+  
+    velocity.add(noiseVector);
+    velocity.div(2);
+    location.add(velocity);
+  
+    lifespan-=7;
+  }
+  
+  boolean isDead()
+  {
+    if (lifespan < 0.0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  
+  void display()
+  {
+    noStroke();
+    fill(c, lifespan);
+    ellipse(location.x, location.y,5,5);
+  }
+  
 }
 	</script>
     <canvas></canvas>
