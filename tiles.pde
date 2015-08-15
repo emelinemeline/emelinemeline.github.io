@@ -1,7 +1,7 @@
 float num1, num2, n1, n2, angle;
 void setup()
 {
-  size(400,400);
+  size(100,100);
   num1=11;
   num2=11;
   angle = 0;
