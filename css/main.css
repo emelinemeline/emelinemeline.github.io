@@ -1,6 +1,7 @@
 body {
     margin: 60px auto;
     width: 70%;
+	background-color: #1A1A26;
 }
 nav ul, footer ul {
     font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -14,7 +15,7 @@ nav ul li, footer ul li {
 }
 a {
     text-decoration: none;
-    color: #999;
+    color: #c7d1bc;
 }
 a:hover {
     text-decoration: underline;
@@ -22,22 +23,15 @@ a:hover {
 h1 {
     font-size: 3em;
     font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color: #c7d1bc;
 }
 p {
     font-size: 1.5em;
     line-height: 1.4em;
-    color: #333;
+    color: #c7d1bc;
 }
 footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
-}
-
-ul.posts { 
-    margin: 20px auto 40px; 
-    font-size: 1.5em;
-}
-
-ul.posts li {
-    list-style: none;
+	color: #c7d1bc;
 }
