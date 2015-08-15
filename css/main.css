@@ -1,37 +1,18 @@
-body {
-    margin: 60px auto;
-    width: 70%;
-	background-color: #1A1A26;
-}
-nav ul, footer ul {
-    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-}
-nav ul li, footer ul li {
-    display: inline;
-    margin-right: 20px;
-}
-a {
-    text-decoration: none;
-    color: #c7d1bc;
-}
-a:hover {
-    text-decoration: underline;
-}
-h1 {
-    font-size: 3em;
-    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-	color: #c7d1bc;
-}
-p {
-    font-size: 1.5em;
-    line-height: 1.4em;
-    color: #c7d1bc;
-}
-footer {
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-	color: #c7d1bc;
-}
+body { margin: 60px auto; width: 70%; background-color: #1A1A26;}
+
+a { text-decoration: none; color: #c7d1bc; }
+a:hover { text-decoration: underline; }
+
+p, ul { font-size: 1.5em; line-height: 1.4em; color: #c7d1bc; }
+
+h1, h2, h3, h4 { font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; color: #c7d1bc;}
+h1 { font-size: 3em;  }
+h2 { font-size: 2.7em; }
+h3 { font-size: 2.3em; }
+h4 { font-size: 1.9em; }
+
+nav ul, footer ul { font-size: 1em; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; padding: 0px; list-style: none; font-weight: bold; color: #c7d1bc;}
+nav ul li, footer ul li { display: inline; margin-right: 20px; }
+
+footer { border-top: 1px solid #d5d5d5; font-size: .8em; color: #c7d1bc;}
+
