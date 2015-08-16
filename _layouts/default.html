@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ page title }}</title>
-	<!-- link to main stylesheet -->
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+    <title>{{ page.title }}</title>
+    
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+  
   </head>
+
 
   <body>
     <nav>
-	<u1>
-		<li><a href="/">Home</a></li>
-		<li><a href="/about">About</a></li>
-		<li><a href="/resume">Resume</a></li>
-		<li><a href="/blog">Blog</a></li>
-	</u1>
-	</nav>
-	
-	<div class="container">
-		{{ container }}
-	</div>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/resume">Resume</a></li>
+<li><a href="/blog">Blog</a></li>
+</ul>
+    </nav>
+<div class="container">
 
+  {{ content }}
+
+</div>
+  
   </body>
+
 </html>
