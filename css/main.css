@@ -1,9 +1,9 @@
-body { margin: 60px auto; width: 70%}
+body { margin: 60px auto; width: 70%; color:#FFFFFF;}
 
-a { text-decoration: none; color: #1A1A26; }
+a { text-decoration: none; color: #1A1A26;}
 a:hover { text-decoration: underline; }
 
-p, ul { font-size: 1.5em; line-height: 1.4em; color: #1A1A26; }
+p, ul { font-size: 1.5em; line-height: 1.4em; color: #1A1A26;}
 
 h1, h2, h3, h4 { font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; color: #1A1A26;}
 h1 { font-size: 3em;  }
