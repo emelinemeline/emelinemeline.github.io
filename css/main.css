@@ -1,12 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import url(http://fonts.googleapis.com/css?family=Gentium+Basic);
 
-body { margin: 60px auto; width: 70%; background-color:#C9D5B5;}
+body { margin: 60px auto; width: 70%; background-color:#EFF7DE;}
 
 a { text-decoration: none; color: #999; font-family: 'Gentium Basic', serif;}
 a:hover { text-decoration: underline; }
 
-p, u1, h1, h2, h3, h4 {color:#1D1128;}
+p, u1, h1, h2, h3, h4 {color:#45424A;}
 p, ul { font-size: 1.5em; line-height: 1.4em; color: #333; font-family: 'Gentium Basic', serif;}
 
 h1, h2, h3, h4, title { font-family: 'Lato', sans-serif; }
