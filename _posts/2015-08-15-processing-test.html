@@ -1,1 +1,26 @@
+---
+layout: post
+title: "Processing Test"
+date: 2015-08-15
+---
 
+<!DOCTYPE html>
+<html>
+  <head>  
+    <title>Testing Processing</title>
+    <script src="processing.min.js"></script>
+  </head>
+  <body>
+    <h1>Processing.js test</h1>
+    <p>Processing</p>
+    <script type="text/processing" data-processing-target="processing-canvas">
+      void setup()
+      {
+        size(100,100);
+        background(0);
+        ellipse(50, 50, 30, 30);
+      }
+    </script>
+    <canvas id="processing-canvas"></canvas>
+  </body>
+</html>
