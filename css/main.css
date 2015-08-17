@@ -7,7 +7,7 @@ a { text-decoration: none; color: #6b6672; font-family: 'Gentium Basic', serif;}
 a:hover { text-decoration: underline; }
 
 p, u1, h1, h2, h3, h4, nav u1 {color:#6b6672;}
-p, ul { font-size: 1em; line-height: 1.1em; font-family: 'Gentium Basic', serif;}
+p, ul { font-size: 1.5em; font-family: 'Gentium Basic', serif;}
 
 h1, h2, h3, h4, title { font-family: 'Lato', sans-serif; }
 h1 { font-size: 3em;  }
