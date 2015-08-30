@@ -4,7 +4,7 @@ Particle[] particles = new Particle[num];
 
 void setup()
 {
-  size(600,600);
+  size(300,300);
   smooth();
   
   for (int i=0;i<particles.length;i++)
