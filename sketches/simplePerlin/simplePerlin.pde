@@ -5,9 +5,9 @@ Particle[] particles = new Particle[num];
 void setup()
 {
   frameRate(60);
-  size(600,600);
+  size(300,300);
   smooth();
-  
+  colorMode(RGB,255,255,255,100);
   for (int i=0;i<particles.length;i++)
   {
     particles[i] = new Particle(new PVector(random(0,width),random(0,height)));
