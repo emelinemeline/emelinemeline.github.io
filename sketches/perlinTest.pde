@@ -1,10 +1,10 @@
-int num = 100;
+int num = 10;
 Particle[] particles = new Particle[num];
 
 
 void setup()
 {
-  size(600,600);
+  size(200,200);
   smooth();
   
   for (int i=0;i<particles.length;i++)
