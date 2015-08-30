@@ -9,7 +9,7 @@ class Particle
   Particle(PVector loc_)
   {
     loc=loc_;
-    vel = new PVector(random(-1,5), random(-5,1));
+    vel = new PVector(random(-1,1), random(-1,1));
     noiseVec = new PVector();
   }
   

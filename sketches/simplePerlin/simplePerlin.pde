@@ -21,3 +21,8 @@ void draw()
     particles[j].run();
   }
 }
+
+void mouseClicked()
+{
+  setup();
+}
