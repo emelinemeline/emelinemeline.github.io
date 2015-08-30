@@ -8,7 +8,7 @@ class Particle
   
   Particle(PVector loc_)
   {
-    loc=loc_;
+    loc=loc_.copy();
     vel = new PVector(random(-1,1), random(-1,1));
     noiseVec = new PVector();
   }
