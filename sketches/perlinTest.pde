@@ -4,11 +4,11 @@ Particle[] particles = new Particle[num];
 
 void setup()
 {
+  frameRate(60);
   size(200,200);
   smooth();
   
-  for (int i=0;i<particles.length;i++)
-  {
+  for (int i=0;i<particles.length;i++){
     particles[i] = new Particle(new PVector(random(0,width),random(0,height)));
   }
   background(0);
