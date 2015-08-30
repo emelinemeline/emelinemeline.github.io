@@ -1,9 +1,10 @@
-int num = 1000;
+int num = 100;
 Particle[] particles = new Particle[num];
 
 
 void setup()
 {
+  frameRate(60);
   size(600,600);
   smooth();
   
