@@ -1,4 +1,4 @@
-int num = 1000;
+int num = 100;
 Particle[] particles = new Particle[num];
 
 
