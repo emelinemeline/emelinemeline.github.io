@@ -2,12 +2,28 @@
 layout: default
 title: Blog
 ---
+
+
+
+
+<body>
+  <div class="ui visible left sidebar inverted vertical menu">
+	<ul class="posts">
+
+	  {% for post in site.posts %}
+		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	  {% endfor %}
+		
+	</ul>
+  </div>
+
+
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
   <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-  <h3 class="author">
+  <h4 class="author">
     <span class="date">{{ post.date | date_to_long_string }}</span>
-  </h3>
+  </h4>
   <div class="content">
     {{ post.content }}
   </div>
@@ -27,3 +43,4 @@ title: Blog
     <span class="next ">Next</span>
   {% endif %}
 </div>
+</body>
