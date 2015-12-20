@@ -33,16 +33,21 @@ ul.posts { margin: 20px auto 40px; font-size: 1.5em; font-family: 'Gentium Basic
 ul.posts li { list-style: none; }
 
 /* Sidebar */
+.top {
+	position:absolute;
+	left:0; right:0;
+	height: 100px;	
+}
 .sidebar {
-        position:absolute;
-        left:0; bottom: 0;
-        width: 400px;
-		overflow:auto;
+	position:absolute;
+	left:0; top:100px; bottom: 0;
+	width: 400px;
+	overflow:auto;
     }
 .main {
-        position: absolute;
-        left:408px; right:0; bottom:0;
-		overflow:auto;
+	position: absolute;
+	left:408px; top:100px; right:0; bottom:0;
+	overflow:auto;
     }
 
 /* CV */
