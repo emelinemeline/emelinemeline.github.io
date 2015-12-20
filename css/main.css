@@ -7,19 +7,21 @@ a { text-decoration: none; color: #8FB9BA; font-family: 'Gentium Basic', serif;}
 a:hover { text-decoration: underline; }
 
 h1 {color:#8FB9BA;}
-p, u1, h2, h3, h4, nav u1 {color:#000000;}
-p, ul { font-size: 1.5em; font-family: 'Gentium Basic', serif}
+p, u1, h2, h3, h4, nav u1 {color:#000000;text-align: left;}
+p, ul { font-size: 1.5em; font-family: 'Gentium Basic', serif; text-align: left;}
 
-h1, h2, h3, h4, title { font-family: 'Lato', sans-serif; }
-h1 { font-size: 3em;  }
-h2 { font-size: 2.7em; }
-h3 { font-size: 2.3em; }
-h4 { font-size: 1.3em; }
+h1, h2, h3, h4, title { font-family: 'Lato', sans-serif; text-align: left; line-height: 6px;}
+h1 { font-size: 3em;  text-align: left;}
+h2 { font-size: 2.7em; text-align: left;}
+h3 { font-size: 2.3em; text-align: left;}
+h4 { font-size: 1.3em; text-align: left;}
 
 pre {  
 	font-family			: monaco, "Courier New", Courier, monospace; 
 	font-size			: 11px; 
-	line-height			: normal; color: #000000;
+	line-height			: normal; 
+	color: #000000;
+	text-align: left;
 }
 pre.code { clear: both; margin-top: 10px; }
 
