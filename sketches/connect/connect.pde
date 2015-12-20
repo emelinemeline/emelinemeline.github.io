@@ -1,4 +1,4 @@
-Particle[] particles = new Particle[1500];
+Particle[] particles = new Particle[800];
 Connector[] c = new Connector[6];
 
 float elapsedFrames, d, limit;
