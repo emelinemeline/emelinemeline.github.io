@@ -25,6 +25,7 @@ title: Blog
 
 <!-- Pagination links -->
 <div class="pagination">
+<h3>
   {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
   {% else %}
@@ -36,6 +37,7 @@ title: Blog
   {% else %}
     <span class="next ">Next</span>
   {% endif %}
+</h3>
 </div>
 </div>
 </body>

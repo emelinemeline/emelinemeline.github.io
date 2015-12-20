@@ -37,11 +37,12 @@ ul.posts li { list-style: none; }
         position:absolute;
         left:0; bottom: 0;
         width: 400px;
+		overflow:auto;
     }
 .main {
         position: absolute;
         left:408px; right:0; bottom:0;
-		overflow:scroll;
+		overflow:auto;
     }
 
 /* CV */
