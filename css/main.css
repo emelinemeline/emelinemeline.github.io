@@ -41,6 +41,7 @@ ul.posts li { list-style: none; }
 .main {
         position: absolute;
         left:408px; right:0; bottom:0;
+		overflow:scroll;
     }
 
 /* CV */
