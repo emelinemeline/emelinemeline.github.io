@@ -15,54 +15,54 @@ title: Tiles
 	<p>One</p>
 	<canvas data-src="/sketches/tiles/tiles.pde"></canvas>
 	<pre class="code">
-		float num1, num2, n1, n2, angle;
-		void setup()
-		{
-		  size(400,400);
-		  num1=11;
-		  num2=11;
-		  angle = 0;
-		  rectMode(CENTER);
-		}
+float num1, num2, n1, n2, angle;
+void setup()
+{
+  size(400,400);
+  num1=11;
+  num2=11;
+  angle = 0;
+  rectMode(CENTER);
+}
 
-		void draw()
-		{
-		  background(255, 55);
-		  n1 = width/num1;
-		  n2 = height/num2;
-		  for (int j=0; j<=num2; j++){
-			for (int i=0; i<=num1; i++){
-			  pushMatrix();
-			  noStroke();
-			  fill(0, 50);
-			  translate(n1*i, n2*j);
-			  //Change this for the variations
-			  if ((i*j)%2==0) {
-				rotate(angle);
-				//Change the number of sides and size
-				polygon(0,0,20,5);
-			  }
-			  else {
-				rotate(angle*-1);
-				polygon(0, 0, 40, 5);
-			  }
-			  popMatrix();
-			}
-		  }
-		  angle+=0.02;
-		}
-		
-		//Function to create a polygon
-		void polygon(float x, float y, float radius, int npoints) {
-		  float angle = TWO_PI / npoints;
-		  beginShape();
-		  for (float a = 0; a < TWO_PI; a += angle) {
-			float sx = x + cos(a) * radius;
-			float sy = y + sin(a) * radius;
-			vertex(sx, sy);
-		  }
-		  endShape(CLOSE);
-		}	
+void draw()
+{
+  background(255, 55);
+  n1 = width/num1;
+  n2 = height/num2;
+  for (int j=0; j<=num2; j++){
+	for (int i=0; i<=num1; i++){
+	  pushMatrix();
+	  noStroke();
+	  fill(0, 50);
+	  translate(n1*i, n2*j);
+	  //Change this for the variations
+	  if ((i*j)%2==0) {
+		rotate(angle);
+		//Change the number of sides and size
+		polygon(0,0,20,5);
+	  }
+	  else {
+		rotate(angle*-1);
+		polygon(0, 0, 40, 5);
+	  }
+	  popMatrix();
+	}
+  }
+  angle+=0.02;
+}
+
+//Function to create a polygon
+void polygon(float x, float y, float radius, int npoints) {
+  float angle = TWO_PI / npoints;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) {
+	float sx = x + cos(a) * radius;
+	float sy = y + sin(a) * radius;
+	vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}	
 	</pre>
 	
 	<p>Two</p>
@@ -71,9 +71,5 @@ title: Tiles
 	<canvas data-src="/sketches/tiles4/tiles4.pde"></canvas>
 	<p>Four</p>
 	<canvas data-src="/sketches/tiles5/tiles5.pde"></canvas>
-	<p>Five</p>
-	<canvas data-src="/sketches/tiles6/tiles6.pde"></canvas>
-	<p>Six</p>
-	<canvas data-src="/sketches/tiles7/tiles7.pde"></canvas>
-	<p>Seven</p>
-	<canvas data-src="/sketches/tiles8/tiles8.pde"></canvas>
+	<br>
+	<a href="/_posts/2015-12-18-tiles-cont.html">Tiles, continued</a>
