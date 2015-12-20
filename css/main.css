@@ -37,7 +37,7 @@ ul.posts li { list-style: none; }
 /* Sidebar */
 .top {
 	position:absolute;
-	left:30; right:0;
+	left:30; right:430;
 	height: 80px;	
 }
 .sidebar {
