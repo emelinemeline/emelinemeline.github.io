@@ -8,7 +8,7 @@ sitemap:
   exclude: 'no
 ---
 <body>
-  <div style="float:left;width:300px">
+  <div class="sidebar">
 	<ul class="posts">
 	  {% for post in site.posts %}
 		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
@@ -16,7 +16,7 @@ sitemap:
 	</ul>
   </div>
   
-<div style="float:right;">
+<div class="main">
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
   <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
