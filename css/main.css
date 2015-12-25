@@ -46,11 +46,16 @@ ul.posts li { list-style: none; }
 	width: 400px;
 	overflow:auto;
     }
-.main {
+.blogmain {
 	position: absolute;
 	left:430px; top:80px; right:0; bottom:0;
 	overflow:auto;
     }
+.main {
+	position: absolute;
+	left:0px; top:80px; right:0; bottom:0;
+	overflow:auto;
+}
 
 /* CV */
 .cv { margin: 0px 0px 60px; }
