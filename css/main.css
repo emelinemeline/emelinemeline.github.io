@@ -42,7 +42,7 @@ ul.posts li { list-style: none; }
 }
 .sidebar {
 	position:absolute;
-	left:40; top:70px; bottom: 0;
+	left:10; top:70px; bottom: 0;
 	width: 400px;
 	overflow:auto;
     }
