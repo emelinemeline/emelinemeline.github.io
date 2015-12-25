@@ -42,13 +42,13 @@ ul.posts li { list-style: none; }
 }
 .sidebar {
 	position:absolute;
-	left:10; top:70px; bottom: 0;
+	left:0; top:70px; bottom: 0;
 	width: 400px;
 	overflow:auto;
     }
 .blogmain {
 	position: absolute;
-	left:450px; top:70px; right:0; bottom:0;
+	left:460px; top:70px; right:0; bottom:0;
 	overflow:auto;
     }
 .main {
