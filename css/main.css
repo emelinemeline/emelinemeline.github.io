@@ -42,18 +42,18 @@ ul.posts li { list-style: none; }
 }
 .sidebar {
 	position:absolute;
-	left:40; top:50px; bottom: 0;
+	left:40; top:70px; bottom: 0;
 	width: 400px;
 	overflow:auto;
     }
 .blogmain {
 	position: absolute;
-	left:430px; top:50px; right:0; bottom:0;
+	left:450px; top:70px; right:0; bottom:0;
 	overflow:auto;
     }
 .main {
 	position: absolute;
-	left:40px; top:50px; right:0; bottom:0;
+	left:40px; top:70px; right:0; bottom:0;
 	overflow:auto;
 }
 
