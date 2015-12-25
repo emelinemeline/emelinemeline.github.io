@@ -57,6 +57,14 @@ ul.posts li { list-style: none; }
 	overflow:auto;
 }
 
+.footer{
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	height:100px;
+}
+
 
 /* CV */
 .cv { margin: 0px 0px 60px; }
