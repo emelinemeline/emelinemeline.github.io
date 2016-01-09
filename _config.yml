@@ -1,3 +1,7 @@
+# Dependencies
+markdown:            redcarpet
+highlighter:         pygments
+
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
@@ -12,8 +16,6 @@ shorturl:			 emelineliu.com
 paginate:            1
 baseurl:             http://emelineliu.com
 
-# Set pygments to true for syntax hightlighting
-pygments:			 true
 
 # Assets
 #
