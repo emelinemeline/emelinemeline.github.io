@@ -68,7 +68,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="cleaning" class="section level1">
 <h1>Cleaning</h1>
 <p>I used the TM package to assemble my corpus. I performed standard text transformations - move all case to lower, remove numbers, remove punctation, remove common stopwords, strip whitespace, and get rid of special characters. I also utilized stemming, which should cut words to their base.</p>
-<pre class="r"><code>library(tm)
+<pre><code>library(tm)
 library(plyr)
 library(httr)
 library(stringr)
@@ -106,7 +106,7 @@ tdm1 &lt;- TermDocumentMatrix(corpus, control=list(wordLengths=c(3,Inf)))
 #Create document term matrix, remove words with fewer than 3 characters
 dtm1 &lt;- DocumentTermMatrix(corpus, control=list(wordLengths=c(3,Inf)))</code></pre>
 <p>The final result of the cleaning is a term document matrix (You can also use a document term matrix; term document and document term matrices are transposes.). A term document matric is a mathetical matrix that contains the frequency of terms that occur in a collection of documents.</p>
-<pre class="r"><code>tdm1</code></pre>
+<pre><code>tdm1</code></pre>
 <pre><code>## &lt;&lt;TermDocumentMatrix (terms: 34812, documents: 9)&gt;&gt;
 ## Non-/sparse entries: 119507/193801
 ## Sparsity           : 62%
@@ -116,24 +116,24 @@ dtm1 &lt;- DocumentTermMatrix(corpus, control=list(wordLengths=c(3,Inf)))</code>
 <div id="most-and-least-frequent-words" class="section level1">
 <h1>Most and Least Frequent words</h1>
 <p>I like to look at the most and least frequent words in a corpus first, because it gives you a very quick picture of what’s going on.</p>
-<pre class="r"><code>#organize by frequency
+<pre><code>#organize by frequency
 dtmsort &lt;- sort(colSums(as.matrix(dtm1)), decreasing=TRUE)
 #most frequent
 head(dtmsort)</code></pre>
 <pre><code>##  will shall  lord   god  said  unto 
 ## 57072 52639 49610 33122 33046 28684</code></pre>
-<pre class="r"><code>#least frequent
+<pre><code>#least frequent
 tail(dtmsort)</code></pre>
 <pre><code>##  zoreah   zorit     zue    zuza  zuzims zuzites 
 ##       1       1       1       1       1       1</code></pre>
 <p>To look at the twenty most frequent words:</p>
-<pre class="r"><code>dtmsort[1:20]</code></pre>
+<pre><code>dtmsort[1:20]</code></pre>
 <pre><code>##   will  shall   lord    god   said   unto    man israel   king    son 
 ##  57072  52639  49610  33122  33046  28684  20219  20159  19368  19315 
 ##    one   thou people   came   come   land    men    thy  house   made 
 ##  18901  17445  16135  15941  15745  14752  14676  14510  14095  13612</code></pre>
 <p>Here’s a plot of all words with a frequency greater than 10000.</p>
-<pre class="r"><code>#plot frequent words
+<pre><code>#plot frequent words
 (freq.terms &lt;- findFreqTerms(tdm1, lowfreq=10000))</code></pre>
 <pre><code>##  [1] &quot;also&quot;     &quot;came&quot;     &quot;children&quot; &quot;come&quot;     &quot;day&quot;      &quot;give&quot;    
 ##  [7] &quot;god&quot;      &quot;hand&quot;     &quot;house&quot;    &quot;israel&quot;   &quot;king&quot;     &quot;land&quot;    
@@ -141,7 +141,7 @@ tail(dtmsort)</code></pre>
 ## [19] &quot;now&quot;      &quot;one&quot;      &quot;people&quot;   &quot;put&quot;      &quot;said&quot;     &quot;shall&quot;   
 ## [25] &quot;son&quot;      &quot;thee&quot;     &quot;thou&quot;     &quot;thy&quot;      &quot;unto&quot;     &quot;upon&quot;    
 ## [31] &quot;went&quot;     &quot;will&quot;</code></pre>
-<pre class="r"><code>term.freq &lt;- rowSums(as.matrix(tdm1))
+<pre><code>term.freq &lt;- rowSums(as.matrix(tdm1))
 term.freq &lt;- subset(term.freq, term.freq&gt;=10000)
 df1 &lt;- data.frame(term=names(term.freq),freq=term.freq)
 
@@ -152,7 +152,7 @@ ggplot(df1, aes(x=term,y=freq)) + geom_bar(stat=&quot;identity&quot;) + xlab(&qu
 <div id="word-cloud" class="section level1">
 <h1>Word Cloud</h1>
 <p>Word cloud with all words with minimum frequency of 5000.</p>
-<pre class="r"><code>#word cloud
+<pre><code>#word cloud
 m1 &lt;- as.matrix(tdm1)
 word.freq &lt;- sort(rowSums(m1), decreasing=T)
 wordcloud(words=names(word.freq), freq=word.freq, min.freq=5000,random.order=F, scale=c(5, .1), colors=brewer.pal(9, &quot;Spectral&quot;))</code></pre>
@@ -161,7 +161,7 @@ wordcloud(words=names(word.freq), freq=word.freq, min.freq=5000,random.order=F, 
 <div id="cluster-dendrogram" class="section level1">
 <h1>Cluster Dendrogram</h1>
 <p>A dendogram is a hierarchical diagram that shows similarities between objects. When I look at other text mining posts on the internet, I usually see people remove the sparse terms of the document term matrix, and use that for their cluster dendrogram. I was still getting a mammoth number of entries even when removing terms with a sparsity of 0.95, which would be getting rid of all words that occur with a ratio of less than 0.95. I decided to just make the diagram with the 35 most common words.</p>
-<pre class="r"><code>#Gets the 35 most frequent words
+<pre><code>#Gets the 35 most frequent words
 dtmsortcut &lt;- dtmsort[1:35]
 m2 &lt;- as.matrix(dtmsortcut)
 #Creates the distance matrix
@@ -174,7 +174,7 @@ rect.hclust(fit, k=5) #5 clusters</code></pre>
 <div id="topic-modeling" class="section level1">
 <h1>Topic Modeling</h1>
 <p>I always look at topic models, but I am never able to get anything too meaningful out of them. I’m assuming that’s because I don’t understand the algorithms behind the method at all. But here are five topics and the first eight terms of every topic.</p>
-<pre class="r"><code>#Remove zero rows
+<pre><code>#Remove zero rows
 dtm1 &lt;- dtm1[apply(dtm1[,-1], 1, function(x) !all(x==0)),]
 lda &lt;- LDA(dtm1, k=5) #find 5 topics
 (term &lt;- terms(lda, 8)) #first 8 terms of every topic</code></pre>
