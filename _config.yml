@@ -5,9 +5,10 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               Emeline Liu
+tagline:             'Dabbles in things'
+url:                 http://emelineliu.com
+shorturl:			 emelineliu.com
 paginate:            1
 baseurl:             ""
 
@@ -20,14 +21,14 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Emeline Liu
+  url:               https://twitter.com/eme______
+  email:             emeline.liu@gmail.com
 
 # Custom vars
 version:             2.0.0
 github:
-  repo:              https://github.com/poole/poole
+  repo:              github.com/emelinemeline/emelinemeline.github.io
   
   
 pages_list:
