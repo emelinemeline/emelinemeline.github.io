@@ -10,7 +10,7 @@ tagline:             'Dabbles in things'
 url:                 http://emelineliu.com
 shorturl:			 emelineliu.com
 paginate:            1
-baseurl:             http://emelineliu.com
+baseurl:             ""
 
 # Assets
 #
@@ -39,5 +39,3 @@ pages_list:
   Archive: '/archive/'
   Feed: '/atom.xml'
 	
-gems:
-  - jekyll-sitemap
