@@ -30,11 +30,12 @@ version:             2.0.0
 github:
   repo:              github.com/emelinemeline/emelinemeline.github.io
   
-  
-pages_list:
-	About: '/about/'
-	Archive: '/archive/'
-	Feed: '/atom.xml'
+
+# This is the list of pages to include in the header of the website.
+pages_list:       
+  About: '/about/'
+  Archive: '/archive/'
+  Feed: '/atom.xml'
 	
 gems:
   - jekyll-sitemap
