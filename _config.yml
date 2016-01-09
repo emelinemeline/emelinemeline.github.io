@@ -10,7 +10,7 @@ tagline:             'Dabbles in things'
 url:                 http://emelineliu.com
 shorturl:			 emelineliu.com
 paginate:            1
-baseurl:             ""
+baseurl:             http://emelineliu.com
 
 # Assets
 #
