@@ -2,6 +2,8 @@
 markdown:            redcarpet
 highlighter:         pygments
 
+pygments:			 true
+
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
@@ -15,7 +17,7 @@ url:                 http://emelineliu.com
 shorturl:			 emelineliu.com
 paginate:            1
 baseurl:             http://emelineliu.com
-
+rss:				 atom.xml
 
 # Assets
 #
