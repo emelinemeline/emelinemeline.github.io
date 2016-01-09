@@ -10,7 +10,7 @@ tagline:             'Dabbles in things'
 url:                 http://emelineliu.com
 shorturl:			 emelineliu.com
 paginate:            1
-baseurl:             ""
+baseurl:             http://emelineliu.com
 
 # Assets
 #
@@ -30,7 +30,9 @@ version:             2.0.0
 github:
   repo:              github.com/emelinemeline/emelinemeline.github.io
   
-
+# For Disqus
+disqusurl:			 http://emelineliu.com
+  
 # This is the list of pages to include in the header of the website.
 pages_list:       
   About: '/about/'
