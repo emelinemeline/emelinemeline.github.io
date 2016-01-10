@@ -1,20 +1,20 @@
 int count=120;
 int sz=2;
 float[][] dots = new float[count][4];
-float radius=35;
-float speed = 0.15;
+float closeradius=35;
+float spd = 0.15;
 
 void setup()
 {
-  size(120,120);
+  size(1200,100);
   frameRate(60);
 
   for (int i=0; i<count;i++)
   {
     dots[i][0]=random(width); //x location
     dots[i][1]=random(height); //y location
-    dots[i][2]=random(-speed,speed); //x speed
-    dots[i][3]=random(-speed,speed); //y speed
+    dots[i][2]=random(-spd,spd); //x speed
+    dots[i][3]=random(-spd,spd); //y speed
   }
 }
 
@@ -42,7 +42,7 @@ void draw()
     //loop through all dots
     for (int k=0; k<count; k++) {
       //Connect if dots are close
-      if ( (sq(dots[j][0] - dots[k][0]) + sq(dots[j][1] - dots[k][1])) < sq(radius) ) {
+      if ( (sq(dots[j][0] - dots[k][0]) + sq(dots[j][1] - dots[k][1])) < sq(closeradius) ) {
         line(dots[j][0], dots[j][1], dots[k][0], dots[k][1]);
       }
     }
