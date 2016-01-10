@@ -1,12 +1,12 @@
 int count=100;
 int sz=2;
 float[][] dots = new float[count][4];
-float closeradius=35;
+float closeradius=25;
 float spd = 0.15;
 
 void setup()
 {
-  size(1200,80);
+  size(1200,50);
   frameRate(60);
 
   for (int i=0; i<count;i++)
