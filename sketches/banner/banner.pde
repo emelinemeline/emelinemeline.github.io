@@ -1,4 +1,4 @@
-int count=100;
+int count=110;
 int sz=2;
 float[][] dots = new float[count][4];
 float closeradius=25;
@@ -7,7 +7,7 @@ color c;
 
 void setup()
 {
-  size(800,60);
+  size(800,70);
   frameRate(60);
 
   for (int i=0; i<count;i++)
