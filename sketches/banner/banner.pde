@@ -7,7 +7,7 @@ color c;
 
 void setup()
 {
-  size(800,50);
+  size(800,60);
   frameRate(60);
 
   for (int i=0; i<count;i++)
