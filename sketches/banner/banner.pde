@@ -6,7 +6,7 @@ float spd = 0.15;
 
 void setup()
 {
-  size(1200,300);
+  size(1200,200);
   frameRate(60);
 
   for (int i=0; i<count;i++)
