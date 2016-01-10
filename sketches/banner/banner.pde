@@ -24,7 +24,7 @@ void draw()
   fill(255);
   for (int j=0;j<count;j++)
   {
-    fill(255);
+    fill(#8FB9BA);
     //draw dots
     ellipse(dots[j][0], dots[j][1], size, size);
     //move dots
@@ -37,12 +37,12 @@ void draw()
     if (dots[j][1] > height || dots[j][1]<0){
       dots[j][3]*=-1;}
     
-    stroke(255);
-    strokeWeight(0.5);
+    stroke(#8FB9BA);
+    strokeWeight(0.6);
     //loop through all dots
     for (int k=0; k<count; k++) {
       //Connect if dots are close
-      if ( sq(dots[j][0] - dots[k][0]) + sq(dots[j][1] - dots[k][1]) < sq(radius) ) {
+      if ( (sq(dots[j][0] - dots[k][0]) + sq(dots[j][1] - dots[k][1])) < sq(radius) ) {
         line(dots[j][0], dots[j][1], dots[k][0], dots[k][1]);
       }
     }
