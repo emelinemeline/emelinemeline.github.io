@@ -2,7 +2,7 @@ int count=100;
 int sz=2;
 float[][] dots = new float[count][4];
 float closeradius=25;
-float spd = 0.15;
+float spd = 0.1;
 
 void setup()
 {
