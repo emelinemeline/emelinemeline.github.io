@@ -84,7 +84,7 @@ cname &lt;- (&quot;C:/Users/Emeline/Documents/R_projects/bible/text&quot;)
 corpus &lt;- Corpus(DirSource(cname))
 
 #Cleaning
-corpus &lt;- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, tolower)
 corpus &lt;- tm_map(corpus, removeNumbers)
 corpus &lt;- tm_map(corpus, removePunctuation)
 corpus &lt;- tm_map(corpus, removeWords, stopwords(&quot;english&quot;))
