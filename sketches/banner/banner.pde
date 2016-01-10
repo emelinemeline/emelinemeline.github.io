@@ -3,6 +3,7 @@ int sz=2;
 float[][] dots = new float[count][4];
 float closeradius=25;
 float spd = 0.1;
+color c;
 
 void setup()
 {
@@ -24,7 +25,15 @@ void draw()
   fill(255);
   for (int j=0;j<count;j++)
   {
-    fill(#8FB9BA);
+    if ( (sq(dots[j][0] - mouseX) + sq(dots[j][1] - mouseY)) < sq(closeradius) ) {
+      c = #FAFCFC;
+      strokeWeight(1.4);
+    }
+    else {
+      c = #8FB9BA;
+      strokeWeight(0.6);
+    }
+    fill(c);
     //draw dots
     ellipse(dots[j][0], dots[j][1], sz, sz);
     //move dots
@@ -37,8 +46,8 @@ void draw()
     if (dots[j][1] > height || dots[j][1]<0){
       dots[j][3]*=-1;}
     
-    stroke(#8FB9BA);
-    strokeWeight(0.6);
+    stroke(c);
+    
     //loop through all dots
     for (int k=0; k<count; k++) {
       //Connect if dots are close
@@ -46,5 +55,6 @@ void draw()
         line(dots[j][0], dots[j][1], dots[k][0], dots[k][1]);
       }
     }
+    
   }
 }
