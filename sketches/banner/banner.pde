@@ -1,5 +1,5 @@
 int count=120;
-int size=2;
+int sz=2;
 float[][] dots = new float[count][4];
 float radius=35;
 float speed = 0.15;
@@ -26,7 +26,7 @@ void draw()
   {
     fill(#8FB9BA);
     //draw dots
-    ellipse(dots[j][0], dots[j][1], size, size);
+    ellipse(dots[j][0], dots[j][1], sz, sz);
     //move dots
     dots[j][0]+=dots[j][2];
     dots[j][1]+=dots[j][3];
