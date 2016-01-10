@@ -6,7 +6,7 @@ float speed = 0.15;
 
 void setup()
 {
-  size(1200,80);
+  size(1100,70);
   frameRate(60);
 
   for (int i=0; i<count;i++)
