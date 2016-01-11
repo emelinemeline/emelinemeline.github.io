@@ -15,7 +15,7 @@ title:               Emeline Liu
 tagline:             'Dabbles in things'
 url:                 http://emelineliu.com
 shorturl:			 emelineliu.com
-paginate:            1
+paginate:            5
 baseurl:             ""
 rss:				 atom.xml
 
@@ -39,6 +39,9 @@ github:
   
 # For Disqus
 disqusurl:			 http://emelineliu.com
+
+# For excerpts
+excerpt_separator: "<!--more-->"
   
 # This is the list of pages to include in the header of the website.
 pages_list:       

@@ -4,6 +4,7 @@ title: Migrated to Poole!
 comments: true
 ---
 I decided to switch over to using [Poole](http://getpoole.com/), which is a foundation for Jekyll blogs. I had previously committed to making a Github Pages website from scratch
+<!--more-->
 * because it seemed fun
 * I figured I needed to learn HTML/CSS/web development eventually
 so I didn't want to use any pre-packaged tools.
