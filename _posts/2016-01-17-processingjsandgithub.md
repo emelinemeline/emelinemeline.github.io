@@ -26,11 +26,12 @@ You can include it wherever you want, but just take note of the path to which yo
 ## Include Processing.js as a script
 You want to have this line of code included in the header of any pages that have a Processing sketch:
 {% highlight html %}
-<script src="processing-1.0.0.min.js"></script>
+<script src="/processing.min.js" type="text/javascript"></script>
 {% endhighlight %}
 
 I just threw it into my head.html file, in the /_includes/ folder. You can check that out the structure of that file [here](https://github.com/emelinemeline/emelinemeline.github.io/blob/master/_includes/head.html).
 
+You should modify the text inside the quotes so that it points to wherever you decided to save the file.
 
 ## Commit your sketches to your Pages repo
 I have a sketches folder in my root directory. Again, it doesn't really matter how structure your folders, just take note of the filepath.
@@ -42,7 +43,7 @@ Put this line of code in your page wherever you want the sketch to appear:
 <canvas data-processing-sources="/sketches/example/example.pde"></canvas>
 {% endhighlight %}
 
-If you need to include multiple files, just separate the names with spaces.
+If you need to include multiple files, just separate the names with spaces. Again, edit the filepath so that it actually points to your sketches.
 
 
 ## Notes on troubleshooting
