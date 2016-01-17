@@ -64,5 +64,6 @@ When making my banner, I had a variable named "size" to define how big each dot/
  
 ## Further Resources
 Here are some other resources that were super helpful to me:
- * [Processing.js Quick Start - Processing Developer Edition](http://processingjs.org/articles/p5QuickStart.html)
- * [Source code for the Processing.js website](websitehttps://github.com/processing-js/processing-js.github.io) - I really liked looking at the Processingjs website for inspiration/help!
+##### [Processing.js Quick Start - Processing Developer Edition](http://processingjs.org/articles/p5QuickStart.html)
+
+##### [Source code for the Processing.js website](websitehttps://github.com/processing-js/processing-js.github.io) - I really liked looking at the Processingjs website for inspiration/help!
