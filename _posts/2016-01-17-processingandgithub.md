@@ -6,8 +6,10 @@ comments: true
 
 Here's a super quick tutorial on setting up Processingjs with a Github Pages site!
 
+
 I sunk an embarassing amount of time trying to get this to work myself, so hopefully someone out there on the internet will find this useful.
 
+<!--more-->
 
 ## Grab a copy of Processing.js
 Link on the Processing.js download link [here](http://processingjs.org/download/).
@@ -34,7 +36,7 @@ I just threw it into my head.html file, in the /_includes/ folder. You can check
 I have a sketches folder in my root directory. Again, it doesn't really matter how structure your folders, just take note of the filepath.
 
 
-## Put a <canvas> where you want your sketch to show up
+## Put a canvas where you want your sketch to show up
 Put this line of code in your page wherever you want the sketch to appear:
 {% highlight html %}
 <canvas data-processing-sources="/sketches/example/example.pde"></canvas>
