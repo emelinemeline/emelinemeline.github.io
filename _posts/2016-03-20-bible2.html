@@ -47,7 +47,7 @@ comments: true
 <h1>Associations</h1>
 <p>I LOVE looking at associations. <!--more-->Maybe I’m just naive and not particularly well-read on current updates in AI/machine learning, but I think the human brain is still more effective at reading between the lines right now. Or, at least <em>my</em> brain is more effective at drawing its own conclusions instead of writing algorithms…. But anyway, in this post I’ll be going over associations for the four most commons words in my corpus, which I found in the previous post. Here they are again:</p>
 {% highlight r %}
-<code>library(tm)
+library(tm)
 library(plyr)
 library(httr)
 library(stringr)
@@ -88,15 +88,16 @@ dtm1 <- DocumentTermMatrix(corpus, control=list(wordLengths=c(3,Inf)))
 #organize by frequency
 dtmsort <- sort(colSums(as.matrix(dtm1)), decreasing=TRUE)
 #most frequent
-dtmsort[1:4]</code>{% endhighlight %}
+dtmsort[1:4]{% endhighlight %}
+
 <pre><code>##  will shall  lord   god 
-## 57072 52639 49610 33122</code>{% endhighlight %}
+## 57072 52639 49610 33122</code></pre>
 <p>I was originally planning to look at the top six most common words, but I became overly excited and wrote too many things, so I cut it down to a more digestable three.</p>
 <p>From what I can tell, the findAssocs function in R works by using correlations across the document term matrix. Therefore, a high correlation coefficient should mean that two words were found together in a larger number of documents. A good illustration of this concept can be found at this forum post <a href="http://r.789695.n4.nabble.com/findAssocs-td3845751.html">here</a>. Please note - I set the correleation coefficient arbitrarily to return around 5-15 words per each term of interest, so they do vary by each search word.</p>
 <div id="will" class="section level3">
 <h3>Will</h3>
 <p>I’ll start with the most commonly found word.</p>
-{% highlight r %}<code>findAssocs(dtm1, "will", corlimit=0.95)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "will", corlimit=0.95){% endhighlight %}
 <pre><code>##           will
 ## became    0.98
 ## room      0.98
@@ -105,9 +106,9 @@ dtmsort[1:4]</code>{% endhighlight %}
 ## fishermen 0.96
 ## like      0.96
 ## outside   0.96
-## examples  0.95</code>{% endhighlight %}
+## examples  0.95</code></pre>
 <p>The highly correlated words here weren’t too inspiring for me to write about. I did a search on BibleHub and ran a findAssocs on “room” and “rooms.” From the BibleHub search, the occurences appear to typically be people asking for a room to stay in.</p>
-{% highlight r %}<code>findAssocs(dtm1, "room", corlimit=0.95)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "room", corlimit=0.95){% endhighlight %}
 <pre><code>##           room
 ## became    0.98
 ## will      0.98
@@ -121,8 +122,8 @@ dtmsort[1:4]</code>{% endhighlight %}
 ## taxes     0.96
 ## used      0.96
 ## whitewash 0.96
-## brothers  0.95</code>{% endhighlight %}
-{% highlight r %}<code>findAssocs(dtm1, "rooms", corlimit=0.95)</code>{% endhighlight %}
+## brothers  0.95</code></pre>
+{% highlight r %}findAssocs(dtm1, "rooms", corlimit=0.95){% endhighlight %}
 <pre><code>##             rooms
 ## brothers     1.00
 ## adriatic     0.99
@@ -151,20 +152,20 @@ dtmsort[1:4]</code>{% endhighlight %}
 ## became       0.95
 ## male         0.95
 ## pigs         0.95
-## ruby         0.95</code>{% endhighlight %}
+## ruby         0.95</code></pre>
 <p>These associations also didn’t shed much light for me. I think these numbers found for “rooms” is perhaps an issue with me not cleaning my corpus well enough… My only other note was that “male” appears to be occasonally used interchangeably with “man.” To compare their frequencies:</p>
-{% highlight r %}<code>term.freqall <- rowSums(as.matrix(tdm1))
-term.freqall["male"]</code>{% endhighlight %}
+{% highlight r %}term.freqall <- rowSums(as.matrix(tdm1))
+term.freqall["male"]{% endhighlight %}
 <pre><code>## male 
-## 1050</code>{% endhighlight %}
-{% highlight r %}<code>term.freqall["man"]</code>{% endhighlight %}
+## 1050</code></pre>
+{% highlight r %}term.freqall["man"]{% endhighlight %}
 <pre><code>##   man 
-## 20219</code>{% endhighlight %}
+## 20219</code></pre>
 </div>
 <div id="shall" class="section level3">
 <h3>Shall</h3>
 <p>Next up is “shall.”</p>
-{% highlight r %}<code>findAssocs(dtm1, "shall", corlimit=0.97)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "shall", corlimit=0.97){% endhighlight %}
 <pre><code>##              shall
 ## habitations   0.99
 ## lodge         0.99
@@ -185,9 +186,9 @@ term.freqall["male"]</code>{% endhighlight %}
 ## incline       0.97
 ## recompensed   0.97
 ## reproached    0.97
-## thus          0.97</code>{% endhighlight %}
+## thus          0.97</code></pre>
 <p>I was particularly intrigued by the appearance of the word “reprover,” which is defined as one who criticizes or corrects, disapproves or censures, disproves or refutes. In the bible, the original Hebrew word appears to be “yissor,” or “one who reproves, faultfinder.” <a href="http://biblehub.com/hebrew/3250.htm">source</a> When I took my biblical literacy class, I found out that the name Satan comes from the Hebrew word satan, which translates to adversary or enemy. From my Roman Catholic upbringing, I always felt that those who intentional sought to find fault with God were doomed to Hell. I thought I run a findAssocs on “reprover” to see if it correlated highly with “Satan”.</p>
-{% highlight r %}<code>findAssocs(dtm1, "lord", corlimit=0.7)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "lord", corlimit=0.7){% endhighlight %}
 <pre><code>##           lord
 ## leopards  0.80
 ## lips      0.78
@@ -221,13 +222,13 @@ term.freqall["male"]</code>{% endhighlight %}
 ## uprising  0.71
 ## mounts    0.70
 ## sapphire  0.70
-## valleys   0.70</code>{% endhighlight %}
+## valleys   0.70</code></pre>
 <p>Unfortunately that theory was not fruitful. This “baldness” appears again though; <a href="http://biblehub.com/topical/b/baldness.htm">BibleHub states</a> that this is likely due to the ancient Egyptian habit of constantly shaving the head, only allowing hair growth when in mourning. In contrast, Jews would shave the head to mourn.</p>
 </div>
 <div id="lord" class="section level3">
 <h3>Lord</h3>
 <p>The associations for “lord” were by far the most surprising to see. I mean, leopards??</p>
-{% highlight r %}<code>findAssocs(dtm1, "lord", corlimit=0.7)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "lord", corlimit=0.7){% endhighlight %}
 <pre><code>##           lord
 ## leopards  0.80
 ## lips      0.78
@@ -261,12 +262,11 @@ term.freqall["male"]</code>{% endhighlight %}
 ## uprising  0.71
 ## mounts    0.70
 ## sapphire  0.70
-## valleys   0.70</code>{% endhighlight %}
-{% highlight r %}<code>#http://biblehub.com/topical/l/leopard.htm
-#lips?</code>{% endhighlight %}
+## valleys   0.70</code></pre>
+
 <p>I actually did not find a good reason for the leopards. The animal would have been native to biblical lands, but I’m not sure why it’s commonly associated with “lord.”</p>
 <p>Furthermore, I remain perplexed about the lips. I searched for those associations:</p>
-{% highlight r %}<code>findAssocs(dtm1, "lips", corlimit=0.95)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "lips", corlimit=0.95){% endhighlight %}
 <pre><code>##               lips
 ## valleys       0.98
 ## bones         0.97
@@ -303,7 +303,7 @@ term.freqall["male"]</code>{% endhighlight %}
 ## toes          0.95
 ## vine          0.95
 ## walls         0.95
-</code>{% endhighlight %}
+</code></pre>
 <p>but I’m not sure that is very insightful… I think lips is just commonly used as a rhetorical device.</p>
 <p>But this does offer me a great opportunity for a quick aside!</p>
 <div id="quick-aside-song-of-songs" class="section level4">
@@ -315,7 +315,7 @@ term.freqall["male"]</code>{% endhighlight %}
 </div>
 <div id="god" class="section level3">
 <h3>God</h3>
-{% highlight r %}<code>findAssocs(dtm1, "god", corlimit=0.98)</code>{% endhighlight %}
+{% highlight r %}findAssocs(dtm1, "god", corlimit=0.98){% endhighlight %}
 <pre><code>##           god
 ## damascus 0.99
 ## figs     0.99
@@ -325,7 +325,7 @@ term.freqall["male"]</code>{% endhighlight %}
 ## lion     0.98
 ## rain     0.98
 ## sword    0.98
-## tooth    0.98</code>{% endhighlight %}
+## tooth    0.98</code></pre>
 <p>Damascus is the capital of Syria and is one of the oldest continuousy inhabited cities in the world. The city was surrounded by the Aramaean state of Aram-Damascus from the late 12th century BCE to 732 BCE. The bible does chronicle a significant portion of the land’ history, mostly its interaction with Isarael. This would probably explain why it commonly appears with the word “God.” As another quick aside, there is a horrific prophecy about the destruction of Damascus in Isaiah 17, which starts off with “See, Damascus will no longer be a city but will become a heap of ruins.” There are people who are convinced that this prophecy is starting to come true currently, due to the modern conflict between Israel and Syria. I will refrain from commenting on that here….</p>
 <p>As for the figs, there’s even a whole page on Wikipedia dedicated to the subject! Link <a href="https://en.wikipedia.org/wiki/Figs_in_the_Bible">here</a>. The earliest reference to the fig tree is when Eve eats from the forbidden tree and feels such shame that she clothes herself and Adam in fig leaves. Otherwise, figs are commonly referenced in parables or as rheotical devices.</p>
 </div>
