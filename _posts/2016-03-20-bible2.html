@@ -1,0 +1,351 @@
+---
+layout: post
+title: Text Mining the Bible with R, Pt. 2
+comments: true
+---
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Emeline Liu" />
+
+<meta name="date" content="2016-02-21" />
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<!--
+# Script Name: Bible2.Rmd
+# Purpose: Text mining the bible
+# Authors: Emeline Liu
+# License: Creative Commons Attribution-ShareAlike 4.0 International License.
+##########
+# Latest Changelog Entires:
+# v0.00.01 - Bible2.RMD - Emeline Liu started this blank Rmd
+##########
+
+# Rmd code goes below the comment marker!
+-->
+
+
+
+<div id="associations" class="section level1">
+<h1>Associations</h1>
+<p>I LOVE looking at associations. <!--more-->Maybe I’m just naive and not particularly well-read on current updates in AI/machine learning, but I think the human brain is still more effective at reading between the lines right now. Or, at least <em>my</em> brain is more effective at drawing its own conclusions instead of writing algorithms…. But anyway, in this post I’ll be going over associations for the four most commons words in my corpus, which I found in the previous post. Here they are again:</p>
+{% highlight r %}
+<code>library(tm)
+library(plyr)
+library(httr)
+library(stringr)
+library(tm)
+#The rest of these libraries are used for visualization
+library(ggplot2)
+library(graph)
+library(Rgraphviz)
+library(wordcloud)
+library(FactoMineR)
+library(cluster)
+library(topicmodels)
+library(SnowballC)
+cname <- ("C:/Users/Emeline/Documents/R_projects/bible/text")   
+
+corpus <- Corpus(DirSource(cname))
+
+#Cleaning
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stemDocument)
+corpus <- tm_map(corpus, stripWhitespace)
+
+#Remove special characters
+removeSpecChar <- function(x) gsub("[^[:alnum:]///' ]", "", x)
+corpus <- tm_map(corpus, removeSpecChar)
+
+#convert to a plain text file
+corpus <- tm_map(corpus, PlainTextDocument)
+
+#Create a term document matrix, remove words with fewer than 3 characters
+tdm1 <- TermDocumentMatrix(corpus, control=list(wordLengths=c(3,Inf)))
+#Create document term matrix, remove words with fewer than 3 characters
+dtm1 <- DocumentTermMatrix(corpus, control=list(wordLengths=c(3,Inf)))
+
+#organize by frequency
+dtmsort <- sort(colSums(as.matrix(dtm1)), decreasing=TRUE)
+#most frequent
+dtmsort[1:4]</code>{% endhighlight %}
+<pre><code>##  will shall  lord   god 
+## 57072 52639 49610 33122</code>{% endhighlight %}
+<p>I was originally planning to look at the top six most common words, but I became overly excited and wrote too many things, so I cut it down to a more digestable three.</p>
+<p>From what I can tell, the findAssocs function in R works by using correlations across the document term matrix. Therefore, a high correlation coefficient should mean that two words were found together in a larger number of documents. A good illustration of this concept can be found at this forum post <a href="http://r.789695.n4.nabble.com/findAssocs-td3845751.html">here</a>. Please note - I set the correleation coefficient arbitrarily to return around 5-15 words per each term of interest, so they do vary by each search word.</p>
+<div id="will" class="section level3">
+<h3>Will</h3>
+<p>I’ll start with the most commonly found word.</p>
+{% highlight r %}<code>findAssocs(dtm1, "will", corlimit=0.95)</code>{% endhighlight %}
+<pre><code>##           will
+## became    0.98
+## room      0.98
+## male      0.97
+## used      0.97
+## fishermen 0.96
+## like      0.96
+## outside   0.96
+## examples  0.95</code>{% endhighlight %}
+<p>The highly correlated words here weren’t too inspiring for me to write about. I did a search on BibleHub and ran a findAssocs on “room” and “rooms.” From the BibleHub search, the occurences appear to typically be people asking for a room to stay in.</p>
+{% highlight r %}<code>findAssocs(dtm1, "room", corlimit=0.95)</code>{% endhighlight %}
+<pre><code>##           room
+## became    0.98
+## will      0.98
+## answers   0.97
+## outside   0.97
+## badly     0.96
+## examples  0.96
+## fishermen 0.96
+## floors    0.96
+## rooms     0.96
+## taxes     0.96
+## used      0.96
+## whitewash 0.96
+## brothers  0.95</code>{% endhighlight %}
+{% highlight r %}<code>findAssocs(dtm1, "rooms", corlimit=0.95)</code>{% endhighlight %}
+<pre><code>##             rooms
+## brothers     1.00
+## adriatic     0.99
+## chalk        0.99
+## coated       0.99
+## fortyfirst   0.99
+## fortynine    0.99
+## outside      0.99
+## prior        0.99
+## skinned      0.99
+## thirtysixth  0.99
+## twentysixth  0.99
+## basin        0.98
+## everyone     0.98
+## unwashed     0.98
+## whitewash    0.98
+## mixed        0.97
+## ninetynine   0.97
+## taxes        0.97
+## used         0.97
+## fortyone     0.96
+## overcomes    0.96
+## room         0.96
+## thirtyeight  0.96
+## babies       0.95
+## became       0.95
+## male         0.95
+## pigs         0.95
+## ruby         0.95</code>{% endhighlight %}
+<p>These associations also didn’t shed much light for me. I think these numbers found for “rooms” is perhaps an issue with me not cleaning my corpus well enough… My only other note was that “male” appears to be occasonally used interchangeably with “man.” To compare their frequencies:</p>
+{% highlight r %}<code>term.freqall <- rowSums(as.matrix(tdm1))
+term.freqall["male"]</code>{% endhighlight %}
+<pre><code>## male 
+## 1050</code>{% endhighlight %}
+{% highlight r %}<code>term.freqall["man"]</code>{% endhighlight %}
+<pre><code>##   man 
+## 20219</code>{% endhighlight %}
+</div>
+<div id="shall" class="section level3">
+<h3>Shall</h3>
+<p>Next up is “shall.”</p>
+{% highlight r %}<code>findAssocs(dtm1, "shall", corlimit=0.97)</code>{% endhighlight %}
+<pre><code>##              shall
+## habitations   0.99
+## lodge         0.99
+## reprover      0.99
+## travailing    0.99
+## prevailed     0.98
+## principality  0.98
+## retained      0.98
+## selfwilled    0.98
+## springing     0.98
+## testimonies   0.98
+## untimely      0.98
+## baldness      0.97
+## bundle        0.97
+## confounded    0.97
+## constrained   0.97
+## heed          0.97
+## incline       0.97
+## recompensed   0.97
+## reproached    0.97
+## thus          0.97</code>{% endhighlight %}
+<p>I was particularly intrigued by the appearance of the word “reprover,” which is defined as one who criticizes or corrects, disapproves or censures, disproves or refutes. In the bible, the original Hebrew word appears to be “yissor,” or “one who reproves, faultfinder.” <a href="http://biblehub.com/hebrew/3250.htm">source</a> When I took my biblical literacy class, I found out that the name Satan comes from the Hebrew word satan, which translates to adversary or enemy. From my Roman Catholic upbringing, I always felt that those who intentional sought to find fault with God were doomed to Hell. I thought I run a findAssocs on “reprover” to see if it correlated highly with “Satan”.</p>
+{% highlight r %}<code>findAssocs(dtm1, "lord", corlimit=0.7)</code>{% endhighlight %}
+<pre><code>##           lord
+## leopards  0.80
+## lips      0.78
+## kings     0.77
+## buckets   0.76
+## clouds    0.76
+## eagles    0.76
+## gardens   0.76
+## noses     0.76
+## air       0.75
+## lilies    0.74
+## master    0.74
+## sides     0.74
+## cheese    0.73
+## fathers   0.73
+## hills     0.73
+## cursed    0.72
+## lions     0.72
+## nuts      0.72
+## powder    0.72
+## rewarded  0.72
+## simple    0.72
+## bones     0.71
+## goats     0.71
+## highest   0.71
+## kicked    0.71
+## offerings 0.71
+## rocks     0.71
+## ships     0.71
+## spindle   0.71
+## uprising  0.71
+## mounts    0.70
+## sapphire  0.70
+## valleys   0.70</code>{% endhighlight %}
+<p>Unfortunately that theory was not fruitful. This “baldness” appears again though; <a href="http://biblehub.com/topical/b/baldness.htm">BibleHub states</a> that this is likely due to the ancient Egyptian habit of constantly shaving the head, only allowing hair growth when in mourning. In contrast, Jews would shave the head to mourn.</p>
+</div>
+<div id="lord" class="section level3">
+<h3>Lord</h3>
+<p>The associations for “lord” were by far the most surprising to see. I mean, leopards??</p>
+{% highlight r %}<code>findAssocs(dtm1, "lord", corlimit=0.7)</code>{% endhighlight %}
+<pre><code>##           lord
+## leopards  0.80
+## lips      0.78
+## kings     0.77
+## buckets   0.76
+## clouds    0.76
+## eagles    0.76
+## gardens   0.76
+## noses     0.76
+## air       0.75
+## lilies    0.74
+## master    0.74
+## sides     0.74
+## cheese    0.73
+## fathers   0.73
+## hills     0.73
+## cursed    0.72
+## lions     0.72
+## nuts      0.72
+## powder    0.72
+## rewarded  0.72
+## simple    0.72
+## bones     0.71
+## goats     0.71
+## highest   0.71
+## kicked    0.71
+## offerings 0.71
+## rocks     0.71
+## ships     0.71
+## spindle   0.71
+## uprising  0.71
+## mounts    0.70
+## sapphire  0.70
+## valleys   0.70</code>{% endhighlight %}
+{% highlight r %}<code>#http://biblehub.com/topical/l/leopard.htm
+#lips?</code>{% endhighlight %}
+<p>I actually did not find a good reason for the leopards. The animal would have been native to biblical lands, but I’m not sure why it’s commonly associated with “lord.”</p>
+<p>Furthermore, I remain perplexed about the lips. I searched for those associations:</p>
+{% highlight r %}<code>findAssocs(dtm1, "lips", corlimit=0.95)</code>{% endhighlight %}
+<pre><code>##               lips
+## valleys       0.98
+## bones         0.97
+## camels        0.97
+## dove          0.97
+## horses        0.97
+## people        0.97
+## simple        0.97
+## spears        0.97
+## streets       0.97
+## yoke          0.97
+## ain           0.96
+## carmel        0.96
+## fingers       0.96
+## foxes         0.96
+## gardens       0.96
+## maon          0.96
+## water         0.96
+## wine          0.96
+## clouds        0.95
+## cursed        0.95
+## hammer        0.95
+## honey         0.95
+## japheth       0.95
+## jazer         0.95
+## ner           0.95
+## pleased       0.95
+## priests       0.95
+## sister        0.95
+## suddenly      0.95
+## swords        0.95
+## table         0.95
+## time          0.95
+## toes          0.95
+## vine          0.95
+## walls         0.95
+</code>{% endhighlight %}
+<p>but I’m not sure that is very insightful… I think lips is just commonly used as a rhetorical device.</p>
+<p>But this does offer me a great opportunity for a quick aside!</p>
+<div id="quick-aside-song-of-songs" class="section level4">
+<h4>Quick Aside: Song of Songs</h4>
+<p>The Song of Songs, also known as the Song of Solomon, the Canticles of Canticles, or just Canticles, is one of the scrolls in the Old Testament. I personally refer to it as a book of erotic love poetry, but that is somewhat melodramatic of me. However, it is a back-and-forth poem of two lovers and is unique in the bible for its celebration of sexual love. I immediately thought of this section when I saw “lips,” as I was sure there had to be some vivid imagery there. First, Song of Solomon 4:3 - “Your lips are like a scarlet ribbon; your mouth is lovely. Your temples behind your veil are like the halves of a pomegranate.”</p>
+<p>Next, Song of Solomon 4:11 - “Your lips drop sweetness as the honeycomb, my bride; milk and honey are under your tongue. The fragrance of your garments is like the fragrance of Lebanon.”</p>
+<p>Pretty sensual if I say so….</p>
+</div>
+</div>
+<div id="god" class="section level3">
+<h3>God</h3>
+{% highlight r %}<code>findAssocs(dtm1, "god", corlimit=0.98)</code>{% endhighlight %}
+<pre><code>##           god
+## damascus 0.99
+## figs     0.99
+## fourteen 0.99
+## son      0.99
+## blood    0.98
+## lion     0.98
+## rain     0.98
+## sword    0.98
+## tooth    0.98</code>{% endhighlight %}
+<p>Damascus is the capital of Syria and is one of the oldest continuousy inhabited cities in the world. The city was surrounded by the Aramaean state of Aram-Damascus from the late 12th century BCE to 732 BCE. The bible does chronicle a significant portion of the land’ history, mostly its interaction with Isarael. This would probably explain why it commonly appears with the word “God.” As another quick aside, there is a horrific prophecy about the destruction of Damascus in Isaiah 17, which starts off with “See, Damascus will no longer be a city but will become a heap of ruins.” There are people who are convinced that this prophecy is starting to come true currently, due to the modern conflict between Israel and Syria. I will refrain from commenting on that here….</p>
+<p>As for the figs, there’s even a whole page on Wikipedia dedicated to the subject! Link <a href="https://en.wikipedia.org/wiki/Figs_in_the_Bible">here</a>. The earliest reference to the fig tree is when Eve eats from the forbidden tree and feels such shame that she clothes herself and Adam in fig leaves. Otherwise, figs are commonly referenced in parables or as rheotical devices.</p>
+</div>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>Associations are super fun! However, most of this blog post involved me having to look at other research to get any meaningful insight into why those terms would be correlated. In my opinion, associations are another great way to get a high-level grasp of the data, but are just a piece in the puzzle of getting the full story.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
