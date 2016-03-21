@@ -4,7 +4,7 @@ title: 1 Corinthians 9:24-27
 comments: true
 ---
 
-If you ever wanted the clearest, most succint description of my life's driving philosophy, I'd have to say that this verse is it.
+I am profoundly not religious, but if you ever wanted the clearest, most succint description of my life's driving philosophy, I'd have to say that this verse is it.
 
 <!--more-->
 ##1 Corinthians 9:24-27
