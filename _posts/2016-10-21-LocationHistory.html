@@ -1,0 +1,151 @@
+---
+layout: post
+title: Google Location History with R
+comments: true
+---
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Emeline Liu" />
+
+<meta name="date" content="2016-10-21" />
+
+
+</head>
+
+<body>
+
+
+
+<!--
+# Script Name: LocationHistory.Rmd
+# Purpose: This is an exploration of my location history data from Google
+# Authors: Emeline Liu
+# License: Creative Commons Attribution-ShareAlike 4.0 International License.
+##########
+# Latest Changelog Entires:
+# v0.00.01 - LocationHistory.Rmd - Emeline Liu started this blank Rmd
+##########
+
+# Rmd code goes below the comment marker!
+-->
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>I used to not activate location services on my phone because I thought that would conserve battery power. Lately, I've been leaving it on so I can have a log of everywhere I visit. I learned that you can retrieve all of your old location data from Google, so I wanted to see if there was any interesting trends I could suss out.</p><!--more-->
+<p>You can download all of the data that Google has collected on you <a href="https://takeout.google.com/settings/takeout?utm_source=ob&amp;utm_campaign=takeout&amp;hl=en">here</a>. I checked off the Location History (JSON Format), which I downloaded as a .zip.</p>
+</div>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<p>Following <a href="http://stackoverflow.com/a/30854697">an excellent post on StackExchange</a>, this is how I read in the location history datah:</p>
+{% highlight r %}
+library(jsonlite)
+system.time(x <- fromJSON("/home/emeline/Desktop/Takeout/Location History/LocationHistory.json"))
+##    user  system elapsed 
+## 175.872   0.460 176.318
+loc = x$locations
+loc$time = as.POSIXct(as.numeric(x$locations$timestampMs)/1000, 
+                      origin = "1970-01-01")
+
+loc$lat = loc$latitudeE7 / 1e7
+loc$lon = loc$longitudeE7 / 1e7
+head(loc)
+##     timestampMs latitudeE7 longitudeE7 accuracy velocity altitude
+## 1 1476840301000  410179526  -740186461        6        0      -18
+## 2 1476840294896  410177916  -740186968       24       NA       NA
+## 3 1476840209817  410177916  -740186968       24       NA       NA
+## 4 1476840176336  410177900  -740186967       26       NA       NA
+## 5 1476840123926  410178318  -740186584       35       NA       NA
+## 6 1476840105231  410178926  -740186741       50       NA       NA
+##                                                                                   activitys
+## 1                                                                                      NULL
+## 2 1476840296939, still, inVehicle, unknown, onFoot, walking, onBicycle, 54, 23, 17, 4, 4, 2
+## 3                                                                                      NULL
+## 4                                                                                      NULL
+## 5                                                                                      NULL
+## 6                                                                 1476840084800, still, 100
+##   heading                time      lat       lon
+## 1      NA 2016-10-18 21:25:01 41.01795 -74.01865
+## 2      NA 2016-10-18 21:24:54 41.01779 -74.01870
+## 3      NA 2016-10-18 21:23:29 41.01779 -74.01870
+## 4      NA 2016-10-18 21:22:56 41.01779 -74.01870
+## 5      NA 2016-10-18 21:22:03 41.01783 -74.01866
+## 6      NA 2016-10-18 21:21:45 41.01789 -74.01867
+{% endhighlight %}
+<p>Also following the post, I plotted a trajectory graph:</p>
+{% highlight r %}
+library(sp)
+loc.sp = loc
+coordinates(loc.sp) = ~lon+lat
+proj4string(loc.sp) = CRS("+proj=longlat +datum=WGS84")
+
+library(spacetime)
+library(trajectories)
+tr = Track(STIDF(geometry(loc.sp), loc.sp$time, loc.sp@data))
+plot(tr)
+{% endhighlight %}
+<p><img src="/assets/r/LocationHistory_files/figure-html/unnamed-chunk-2-1.png" width="400" /></p>
+<p>I was intrigued by the inclusion of altitude information, so I wanted to see what a 3d plot would look like:</p>
+{% highlight r %}library(scatterplot3d)
+scatterplot3d(loc$lat, loc$lon, loc$altitude){% endhighlight %}
+<p><img src="/assets/r/LocationHistory_files/figure-html/unnamed-chunk-3-1.png" width="400" /> I didn't think it was super helpful....</p>
+<p>From here, I decided on the first things I wanted to look at: what was going on when I was higher in altitude, and where were my most commonly visited places.</p>
+<div id="high-altitude" class="section level3">
+<h3>High Altitude</h3>
+<p>I decided I would filter the location dataframe by when my altitude was greater than 500 and then plot those points against a map.</p>
+{% highlight r %}highalt<-loc[which(loc$altitude&gt;500), ]
+
+library(ggmap)
+## Loading required package: ggplot2
+map<-get_googlemap(center=c(lon=-80, lat=40), zoom=6, maptype="roadmap")
+## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=40,-80&amp;zoom=6&amp;size=640x640&amp;scale=2&amp;maptype=roadmap&amp;sensor=false
+mapHighAlt<-ggmap(map)+geom_point(aes(x = lon, y = lat, colour="red"), data=highalt)
+mapHighAlt{% endhighlight %}
+<p><img src="/assets/r/LocationHistory_files/figure-html/unnamed-chunk-4-1.png" width="620" /></p>
+{% highlight r %}#This is how to get the text addresses that correspond to the latitude/longitude coordinates. However, I'm not going to print them to slightly attempt to conserve my privacy :]
+#highalt$textAddress <- mapply(FUN = function(lon, lat) revgeocode(c(lon, lat)), highalt$lon, highalt$lat)
+{% endhighlight %}
+<p>I know I've flown to Cleveland for school and then Cincinatti for work. It is interesting to see that I was high in altitude closer to home; I'm not sure what that exactly corresponds to. I've also flown to more places in recent memory, but probably left my phone off...</p>
+<p>Weirdly, not sure what the random dot is above Virginia.</p>
+</div>
+<div id="most-frequent-locations" class="section level3">
+<h3>Most Frequent Locations</h3>
+<p>Based on the command below, looks like info has been collected since the end of 2013. I decided to use a frequency of 300 as a cutoff.</p>
+{% highlight r %}min(loc$time)
+## [1] "2013-11-05 08:21:56 EST"
+{% endhighlight %}
+<p>I used the count() function from plyr to check the frequency of coordinates being used:</p>
+{% highlight r %}
+library(plyr)
+freq = count(loc, c('lon', 'lat'))
+#Setting 300 as the cutoff:
+highfreq=freq[which(freq$freq>300), ]
+
+library(ggmap)
+mapfreq&lt;-get_googlemap(center=c(lon=-76.5, lat=41), zoom=6, maptype="roadmap")
+## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=41,-76.5&amp;zoom=6&amp;size=640x640&amp;scale=2&amp;maptype=roadmap&amp;sensor=false
+mapPoints <- ggmap(mapfreq)+geom_point(aes(x = lon, y = lat, size = sqrt(freq), colour = sqrt(freq)), data=highfreq, alpha = .8)
+mapPoints
+{% endhighlight %}
+<p><img src="/assets/r/LocationHistory_files/figure-html/unnamed-chunk-6-1.png" width="620" /></p>
+{% highlight r %}#Not surprisingly, all of my most frequently visited locations corresponded to my alma mater, my family's home, and where I work.
+#highfreqplaces <- mapply(FUN = function(lon, lat) revgeocode(c(lon, lat)), highfreq$loc.lon, highfreq$loc.lat)
+{% endhighlight %}
+<p>Further explorations to follow!</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 int count=110;
 int sz=2;
 float[][] dots = new float[count][4];
-float closeradius=25;
-float spd = 0.1;
+float closeradius=20;
+float spd = 0.06;
 color c;
 
 void setup()
