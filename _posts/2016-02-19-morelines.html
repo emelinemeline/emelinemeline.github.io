@@ -1,0 +1,67 @@
+---
+layout: post
+title: More Lines
+comments: true
+---
+<p>I do tend to love doing variations on a theme in Processing.</p>
+<p>Click to reset!</p>
+	<canvas data-src="/sketches/spinlines/spinlines.pde /sketches/spinlines/aLine.pde"></canvas>
+<br>
+<br>
+<p>Click "Read more" to see the Processing code.</p>
+<!--more-->
+{% highlight java %}
+int num = 120;
+aLine[] lines = new aLine[num];
+void setup(){
+  size(500,360);
+  fill(255);
+  for (int i=0; i<num;i++){
+    lines[i] = new aLine(new PVector(i*(width/num), height/2));
+  }
+  }
+void draw(){
+  background(255);
+  stroke(0);
+  for (int j=0; j<lines.length;j++){
+    lines[j].run();
+  }
+}
+void mouseClicked(){
+    for (int j=0; j<lines.length;j++){
+    lines[j].reset();
+  }
+}
+class aLine
+{
+  PVector loc;
+  float angle=0;  
+  aLine(PVector loc_)
+  {
+    loc = loc_;
+  }
+  void run()
+  {
+    update();
+    display();
+  }  
+  void update()
+  {
+    float d=dist(loc.x, loc.y, mouseX, mouseY);
+    float maxDist = dist (0,0, width/2, height/2);
+    angle = angle+map(d,0, maxDist, 0.08, 0.001);
+  }
+  void display()
+  {
+    rectMode(CENTER);
+    pushMatrix();
+    translate(loc.x, loc.y);
+    rotate(angle);
+    line(-100,0,100,0);
+    popMatrix();
+  }
+  void reset(){
+    angle = 0;
+  }
+}
+{% endhighlight %}

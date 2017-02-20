@@ -1,13 +1,13 @@
-int count=110;
+int count=220;
 int sz=2;
 float[][] dots = new float[count][4];
-float closeradius=20;
+float closeradius=30;
 float spd = 0.06;
 color c;
 
 void setup()
 {
-  size(900,70);
+  size(1000,200);
   frameRate(60);
 
   for (int i=0; i<count;i++)
@@ -17,6 +17,7 @@ void setup()
     dots[i][2]=random(-spd,spd); //x speed
     dots[i][3]=random(-spd,spd); //y speed
   }
+  noLoop();
 }
 
 void draw()
