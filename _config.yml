@@ -13,6 +13,7 @@ shorturl:			 emelineliu.com
 paginate:            5
 baseurl:             ""
 rss:				 atom.xml
+encoding: utf-8
 
 # Assets
 #
