@@ -1,0 +1,78 @@
+---
+layout: post
+title: Perlin
+comments: true
+---
+<img src="/assets/images/perlin.png" alt="perlin">
+<!--more-->
+Generated using the following code:
+{% highlight java %}
+int num = 1300;
+Particle[] particles = new Particle[num];
+
+
+void setup()
+{
+  size(900,255);
+  for (int i=0;i<particles.length;i++)
+  {
+    particles[i] = new Particle(new PVector(random(0,width),random(0,height)));
+  }
+    background(0);
+}
+
+void draw()
+{
+
+  for(int j=0;j<particles.length;j++)
+  {
+    particles[j].run();
+  }
+}
+
+void mouseClicked()
+{
+    save("perlin.png");
+}
+
+class Particle
+{
+  PVector loc;
+  PVector vel;
+  PVector noiseVec;
+  
+  float noise;
+  color c;
+  Particle(PVector loc_)
+  {
+    loc=loc_.copy();
+    vel = new PVector(random(-1,1), random(-1,1));
+    noiseVec = new PVector();
+    c=int(loc.y);
+
+  }
+  
+  void run()
+  {
+    update();
+    display();
+  }
+  
+  void update()
+  {
+    noise = noise(loc.x*0.0015, loc.y*0.0015, frameCount*0.0015);
+    noiseVec.x = cos(((noise - 0.3)*TWO_PI)*10);
+    noiseVec.y = sin(((noise - 0.3)*TWO_PI)*10);
+    vel.add(noiseVec);
+    vel.div(2);
+    loc.add(vel);
+  }
+  
+  void display()
+  {
+    noStroke();
+    fill(c);
+    ellipse(loc.x,loc.y,1,1);
+  }
+}
+{% endhighlight %}
