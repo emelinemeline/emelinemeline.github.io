@@ -5,11 +5,7 @@ title: Resume
 
 ----
 
- * el2816 at nyu.edu
-
- * [GitHub](https://github.com/emelinemeline)
-
- * [LinkedIn](https://www.linkedin.com/in/emelineliu/)
+el2816 at nyu.edu|[GitHub](https://github.com/emelinemeline)|[LinkedIn](https://www.linkedin.com/in/emelineliu/)
 
 ----
 
