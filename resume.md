@@ -16,17 +16,17 @@ Education
 May 2019 (expected)
 :   **Master of Science in Computer Science**; New York University (Brooklyn, NY)
 
-    GPA: 4.0
+    GPA: 3.9
     
-   	Related coursework: Design and Analysis of Algoriths, Data Structures and Algorithms, Computer Architecture, Intro to Operating Systems
+    Related coursework: Design and Analysis of Algoriths, Data Structures and Algorithms, Computer Architecture, Operating Systems, Big Data
 
 
 May 2015
 :   **Bachelor of Science in Systems and Control Engineering**; Case Western Reserve University (Cleveland, OH)
 
     GPA: 3.35
-	
-	Involvement: Captain of Track and Field Team, Brother of APO, President of New Abolitionst Association
+    
+    Involvement: Captain of Track and Field Team, Brother of APO, President of New Abolitionst Association
 
 Academic Projects
 --------------------
@@ -55,11 +55,11 @@ Academic Projects
 Technical Skills
 --------------------
 
-**Programming Languages**; C++, Java, R, Matlab, HTML/CSS, VBA
+**Programming Languages**: Python, C++, Java, R, Matlab, HTML/CSS, VBA
 
 **Other Tools:** JIRA, Agile methodology
 
-Basic knowledge of **Python**, **x64 assembly**, **JavaScript**
+Basic knowledge of **x64 assembly**, **JavaScript**
 	
 	
 Professional Experience
