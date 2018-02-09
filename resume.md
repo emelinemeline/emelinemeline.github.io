@@ -17,7 +17,9 @@ May 2019 (expected)
 :   **Master of Science in Computer Science**; New York University (Brooklyn, NY)
 
     GPA: 4.0
-    Related coursework: Design and Analysis of Algoriths, Data Structures and Algorithms, Computer Architecture, Intro to Operating Systems
+    
+   	Related coursework: Design and Analysis of Algoriths, Data Structures and Algorithms, Computer Architecture, Intro to Operating Systems
+
 
 May 2015
 :   **Bachelor of Science in Systems and Control Engineering**; Case Western Reserve University (Cleveland, OH)
