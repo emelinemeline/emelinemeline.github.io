@@ -5,7 +5,7 @@ title: Resume
 
 ----
 
-el2816 at nyu.edu|[GitHub](https://github.com/emelinemeline)|[LinkedIn](https://www.linkedin.com/in/emelineliu/)
+emeline.liu at gmail.com|el2816 at nyu.edu|[GitHub](https://github.com/emelinemeline)|[LinkedIn](https://www.linkedin.com/in/emelineliu/)
 
 ----
 
@@ -16,7 +16,8 @@ Education
 May 2019 (expected)
 :   **Master of Science in Computer Science**; New York University (Brooklyn, NY)
 
-    Related coursework: Data Structures and Algorithms, Computer Architecture
+    GPA: 4.0
+    Related coursework: Design and Analysis of Algoriths, Data Structures and Algorithms, Computer Architecture, Intro to Operating Systems
 
 May 2015
 :   **Bachelor of Science in Systems and Control Engineering**; Case Western Reserve University (Cleveland, OH)
@@ -52,7 +53,7 @@ Academic Projects
 Technical Skills
 --------------------
 
-**Programming Languages**; R, C++, Java, Matlab, HTML, VBA
+**Programming Languages**; C++, Java, R, Matlab, HTML/CSS, VBA
 
 **Other Tools:** JIRA, Agile methodology
 
