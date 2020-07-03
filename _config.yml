@@ -42,10 +42,9 @@ excerpt_separator: "<!--more-->"
 # This is the list of pages to include in the header of the website.
 pages_list:       
   About: '/about/'
-  Resume: '/resume/'
   Archive: '/archive/'
   Feed: '/atom.xml'
   
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-paginate
